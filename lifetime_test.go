@@ -1,9 +1,8 @@
 package turn
 
 import (
-	"testing"
-
 	"fmt"
+	"testing"
 	"time"
 
 	"github.com/ernado/stun"
