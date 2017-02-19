@@ -12,7 +12,9 @@ import (
 func ExampleLifetime() {
 	// Encoding lifetime to message.
 	m := new(stun.Message)
-	Lifetime{time.Minute}.AddTo(m)
+	Lifetime{
+		Duration: DefaultLifetime,
+	}.AddTo(m)
 	m.WriteHeader()
 
 	// Decoding message.
@@ -21,11 +23,11 @@ func ExampleLifetime() {
 		panic(err)
 	}
 	// Decoding lifetime from message.
-	l := Lifetime{}
-	l.GetFrom(m)
-	fmt.Println("Decoded:", l)
+	var lifetime Lifetime
+	lifetime.GetFrom(m)
+	fmt.Println("Decoded:", lifetime)
 	// Output:
-	// Decoded: 1m0s
+	// Decoded: 10m0s
 }
 
 func BenchmarkLifetime(b *testing.B) {
